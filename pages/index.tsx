@@ -9,7 +9,25 @@ const Home: NextPage = () => {
       <Head>
         <title>dev.cubdesign.com</title>
         <meta name="description" content="dev.cubdesign.com" />
-        <link rel="icon" href="/favicon.ico" />
+
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/static/favicon/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/static/favicon/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/static/favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/static/favicon/site.webmanifest" />
       </Head>
 
       <main className={styles.main}>
@@ -18,14 +36,20 @@ const Home: NextPage = () => {
 
       <footer className={styles.footer}>
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          href="https://cubdesign.com"
           target="_blank"
           rel="noopener noreferrer"
         >
           Powered by{" "}
           <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            <Image
+              src="/static/cubdesign-logo-circle.png"
+              alt="cubdesign Logo"
+              width={16}
+              height={16}
+            />
           </span>
+          cubdesign
         </a>
       </footer>
     </div>
