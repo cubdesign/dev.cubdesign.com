@@ -92,7 +92,7 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{" "}
+          &copy;
           <Logo>
             <Image
               src="/static/cubdesign-logo-circle.png"
