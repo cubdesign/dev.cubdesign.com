@@ -3,12 +3,14 @@ import Home from "@/pages/index";
 
 describe("Home", () => {
   it("renders a heading", () => {
-    render(Home.getLayout!(<Home />));
+    const posts: any[] = [];
+    render(Home.getLayout!(<Home posts={posts} />));
     expect(screen.getByText(/Welcome/)).toBeInTheDocument();
   });
 
   it("layout draw title", () => {
-    render(Home.getLayout!(<Home />));
+    const posts: any[] = [];
+    render(Home.getLayout!(<Home posts={posts} />));
     const heading = screen.getByRole("heading", {
       name: /welcome to dev\.cubdesign\.com/i,
     });

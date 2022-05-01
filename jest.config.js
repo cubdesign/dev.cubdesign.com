@@ -1,5 +1,32 @@
 const nextJest = require("next/jest");
 
+const esModules = [
+  "unified",
+
+  "unist-.+",
+  "mdast-util-.+",
+  "remark-.+",
+  "hast-util-.+",
+  "character-entities-.+",
+
+  "bail",
+  "is-plain-obj",
+  "trough",
+  "vfile",
+  "micromark",
+  "decode-named-character-reference",
+  "ccount",
+  "markdown-table",
+  "property-information",
+  "html-void-elements",
+  "space-separated-tokens",
+  "comma-separated-tokens",
+  "stringify-entities",
+  "rehype-slug",
+  "rehype-autolink-headings",
+  "rehype-stringify",
+].join("|");
+
 const createJestConfig = nextJest({
   // next.config.jsとテスト環境用の.envファイルが配置されたディレクトリをセット。基本は"./"で良い。
   dir: "./",
@@ -25,4 +52,25 @@ const customJestConfig = {
 };
 
 // createJestConfigを定義することによって、本ファイルで定義された設定がNext.jsの設定に反映されます
-module.exports = createJestConfig(customJestConfig);
+// module.exports = createJestConfig(customJestConfig);
+
+/*
+  下記、transformIgnorePatternsを使う設定
+  
+  SM modulesを無視する設定（unifiedのエラー回避）
+
+  https://github.com/vercel/next.js/discussions/31152#discussioncomment-1661596
+*/
+
+// Take the returned async function...
+const asyncConfig = createJestConfig(customJestConfig);
+
+// and wrap it...
+module.exports = async () => {
+  const config = await asyncConfig();
+  config.transformIgnorePatterns = [
+    // Garbage performance due to this. SWC will fix this soon hopefully
+    `<rootDir>/node_modules/(?!${esModules}).+\\.(js|jsx|mjs|cjs|ts|tsx)$`,
+  ];
+  return config;
+};

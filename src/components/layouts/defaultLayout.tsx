@@ -14,24 +14,15 @@ const Main = styled("main")`
   padding: 2rem 2rem;
 `;
 
-const Title = styled("h1")`
-  margin: 0;
-  line-height: 1.1;
-  font-size: 3rem;
-  text-align: center;
-`;
-
 type DefaultLayoutProps = {
   title: string;
   description: string;
-  pageTitle: string;
   children: ReactElement;
 };
 
 const DefaultLayout: React.FC<DefaultLayoutProps> = ({
   title,
   description,
-  pageTitle,
   children,
 }) => {
   return (
@@ -62,10 +53,7 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
 
       <Header />
 
-      <Main>
-        <Title>{pageTitle}</Title>
-        {children}
-      </Main>
+      <Main>{children}</Main>
 
       <Footer />
     </Container>

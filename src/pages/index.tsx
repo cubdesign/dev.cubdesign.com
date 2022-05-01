@@ -1,51 +1,77 @@
 import DefaultLayout from "@/components/layouts/defaultLayout";
-import { NextPageWithLayout } from "next";
+import { GetStaticProps, NextPageWithLayout } from "next";
 import { ReactElement } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import styled from "@emotion/styled";
+import { Slug, Post, getPost, getPostSlugs } from "@/libs/Blog";
 
-const Home: NextPageWithLayout = () => {
+type Props = {
+  posts: Post[];
+};
+
+const PostDiv = styled("div")`
+  border: solid 3px #000000;
+  padding: 1rem;
+`;
+
+const Title = styled("h1")`
+  margin: 0;
+  line-height: 1.1;
+  font-size: 3rem;
+  text-align: center;
+`;
+
+const Home: NextPageWithLayout<Props> = ({ posts }) => {
   return (
     <>
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK! <br />
-      OK!
+      <Title>Welcome to dev.cubdesign.com</Title>
+      {posts.map(({ slug, frontMatter }) => {
+        return (
+          <PostDiv key={slug.join("/")}>
+            <Link href={`/post/${slug.join("/")}`}>
+              <a>
+                <Image
+                  src={`${frontMatter.socialImage}`}
+                  alt={frontMatter.title}
+                  width={650}
+                  height={340}
+                />
+                <h2>{frontMatter.title}</h2>
+              </a>
+            </Link>
+          </PostDiv>
+        );
+      })}
     </>
   );
 };
 
 Home.getLayout = (page: ReactElement) => {
   return (
-    <DefaultLayout
-      title="dev.cubdesign.com"
-      description="dev.cubdesign.com"
-      pageTitle="Welcome to dev.cubdesign.com"
-    >
+    <DefaultLayout title="dev.cubdesign.com" description="dev.cubdesign.com">
       {page}
     </DefaultLayout>
   );
+};
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const slugs: Slug[] = getPostSlugs();
+  const posts: Post[] = [];
+  for (let i: number = 0; i < slugs.length; i++) {
+    const slug: Slug = slugs[i];
+    const { frontMatter } = await getPost(slug);
+    posts.push({
+      slug,
+      frontMatter,
+    });
+  }
+
+  return {
+    props: {
+      posts,
+    },
+  };
 };
 
 export default Home;

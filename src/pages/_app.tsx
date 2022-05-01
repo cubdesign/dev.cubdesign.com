@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/styles/prism-shades-of-purple.css";
 import type { AppPropsWithLayout } from "next/app";
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
