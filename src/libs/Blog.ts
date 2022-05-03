@@ -18,6 +18,7 @@ export type FrontMatter = {
   metaDesc: string;
   socialImage: string;
   date: string;
+  icon: string;
   tags: string[];
 };
 

@@ -2,6 +2,8 @@ import { GetStaticPaths, GetStaticProps, NextPageWithLayout } from "next";
 import { ReactElement } from "react";
 import DefaultLayout from "@/components/layouts/defaultLayout";
 import styled from "@emotion/styled";
+import Date from "@/components/date";
+
 import {
   Slug,
   FrontMatter,
@@ -19,19 +21,41 @@ type Params = {
   slug: Slug;
 };
 
+const Icon = styled("div")`
+  padding-top: 2rem;
+  font-size: 10rem;
+  text-align: center;
+`;
+
 const Title = styled("h1")`
   margin: 0;
+  padding: 2rem;
   line-height: 1.1;
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
+`;
+
+const Body = styled("div")`
+  a {
+    color: #0062ff;
+  }
+
+  a:visited,
+  a:hover,
+  a:active {
+    border-bottom: solid 1px #0062ff;
+    padding-bottom: 1px;
+  }
 `;
 
 const PostPage: NextPageWithLayout<Props> = ({ frontMatter, content }) => {
   return (
-    <div>
+    <article>
+      <Icon>{frontMatter.icon}</Icon>
       <Title>{frontMatter.title}</Title>
-      <div dangerouslySetInnerHTML={{ __html: content }} />
-    </div>
+      <Date dateString={frontMatter.date} />
+      <Body dangerouslySetInnerHTML={{ __html: content }} />
+    </article>
   );
 };
 

@@ -17,8 +17,9 @@ const PostDiv = styled("div")`
 
 const Title = styled("h1")`
   margin: 0;
+  padding: 2rem;
   line-height: 1.1;
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
 `;
 
@@ -34,8 +35,8 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
                 <Image
                   src={`${frontMatter.socialImage}`}
                   alt={frontMatter.title}
-                  width={650}
-                  height={340}
+                  width={640}
+                  height={420}
                 />
                 <h2>{frontMatter.title}</h2>
               </a>
