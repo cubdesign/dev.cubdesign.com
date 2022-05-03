@@ -17,9 +17,10 @@ export type FrontMatter = {
   metaTitle: string;
   metaDesc: string;
   socialImage: string;
-  date: string;
+  createDate: string;
+  updateDate?: string;
   icon: string;
-  tags: string[];
+  tags?: string[];
 };
 
 export type Post = {

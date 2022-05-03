@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { Slug, Post, getPost, getPostSlugs } from "@/libs/Blog";
+import Date from "@/components/date";
 
 type Props = {
   posts: Post[];
@@ -39,6 +40,20 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
                   height={420}
                 />
                 <h2>{frontMatter.title}</h2>
+                <Date dateString={frontMatter.createDate} />
+                {frontMatter.updateDate ? (
+                  <>
+                    {"　更新:"}
+                    <Date
+                      dateString={frontMatter.createDate}
+                      style={{
+                        marginLeft: "8px",
+                      }}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
               </a>
             </Link>
           </PostDiv>

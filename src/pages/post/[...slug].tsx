@@ -27,6 +27,12 @@ const Icon = styled("div")`
   text-align: center;
 `;
 
+const Tag = styled("span")`
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  border: solid 1px #dfdfdf;
+  border-radius: 50px;
+`;
 const Title = styled("h1")`
   margin: 0;
   padding: 2rem;
@@ -53,7 +59,25 @@ const PostPage: NextPageWithLayout<Props> = ({ frontMatter, content }) => {
     <article>
       <Icon>{frontMatter.icon}</Icon>
       <Title>{frontMatter.title}</Title>
-      <Date dateString={frontMatter.date} />
+      <Date dateString={frontMatter.createDate} />
+      {frontMatter.updateDate ? (
+        <>
+          {"　更新:"}
+          <Date
+            dateString={frontMatter.createDate}
+            style={{
+              marginLeft: "8px",
+            }}
+          />
+        </>
+      ) : (
+        ""
+      )}
+
+      {frontMatter.tags?.map((tag: string, index: number) => {
+        return <Tag key={index}>{tag}</Tag>;
+      })}
+
       <Body dangerouslySetInnerHTML={{ __html: content }} />
     </article>
   );

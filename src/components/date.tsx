@@ -1,12 +1,16 @@
 import { parseISO, format } from "date-fns";
 
-export type DateProps = {
+interface TimeProps extends React.ComponentPropsWithoutRef<"time"> {
   dateString: string;
-};
+}
 
-const Date = ({ dateString }: DateProps) => {
+const Date = ({ dateString, ...props }: TimeProps) => {
   const date = parseISO(dateString);
-  return <time dateTime={dateString}>{format(date, "yyyy/MM/dd")}</time>;
+  return (
+    <time dateTime={dateString} {...props}>
+      {format(date, "yyyy/MM/dd")}
+    </time>
+  );
 };
 
 export default Date;
