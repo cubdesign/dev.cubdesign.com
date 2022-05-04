@@ -45,6 +45,11 @@ const Title = styled("h1")`
 const Body = styled("div")`
   padding: 1rem 0;
 
+  h2 {
+    padding-bottom: 2px;
+    border-bottom: solid 1px #e7e4e4;
+  }
+
   a {
     color: #0062ff;
   }

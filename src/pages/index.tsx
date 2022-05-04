@@ -5,18 +5,25 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import { Slug, Post, getPost, getPostSlugs } from "@/libs/Blog";
 import Date from "@/components/date";
+import { css } from "@emotion/react";
+import { getLightenColor, getIconColor } from "@/libs/IconColorUtils";
 
 type Props = {
   posts: Post[];
 };
 
+const backgroundDynamicStyle = ({ color }: { color: string }) =>
+  css`
+    border: solid 3px ${getLightenColor(color)};
+    background-color: ${color};
+  `;
+
 const PostDiv = styled("div")`
-  border: solid 3px #250542;
   color: #ffffff;
-  background-color: #3e0870;
   padding: 1rem;
   margin-bottom: 2rem;
   text-align: center;
+  ${backgroundDynamicStyle};
 `;
 
 const Title = styled("h1")`
@@ -39,7 +46,7 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
       <Title>Welcome to dev.cubdesign.com</Title>
       {posts.map(({ slug, frontMatter }) => {
         return (
-          <PostDiv key={slug.join("/")}>
+          <PostDiv key={slug.join("/")} color={getIconColor(frontMatter.icon)}>
             <Link href={`/post/${slug.join("/")}`}>
               <a>
                 <Icon>{frontMatter.icon}</Icon>
