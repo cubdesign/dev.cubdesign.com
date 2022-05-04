@@ -33,6 +33,7 @@ const Tag = styled("span")`
   border: solid 1px #dfdfdf;
   border-radius: 50px;
 `;
+
 const Title = styled("h1")`
   margin: 0;
   padding: 2rem;

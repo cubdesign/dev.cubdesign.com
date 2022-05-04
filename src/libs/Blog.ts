@@ -16,7 +16,7 @@ export type FrontMatter = {
   title: string;
   metaTitle: string;
   metaDesc: string;
-  socialImage: string;
+  socialImage?: string;
   createDate: string;
   updateDate?: string;
   icon: string;

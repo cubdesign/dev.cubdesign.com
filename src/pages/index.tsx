@@ -1,7 +1,6 @@
 import DefaultLayout from "@/components/layouts/defaultLayout";
 import { GetStaticProps, NextPageWithLayout } from "next";
 import { ReactElement } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { Slug, Post, getPost, getPostSlugs } from "@/libs/Blog";
@@ -12,8 +11,12 @@ type Props = {
 };
 
 const PostDiv = styled("div")`
-  border: solid 3px #000000;
+  border: solid 3px #250542;
+  color: #ffffff;
+  background-color: #3e0870;
   padding: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
 `;
 
 const Title = styled("h1")`
@@ -21,6 +24,12 @@ const Title = styled("h1")`
   padding: 2rem;
   line-height: 1.1;
   font-size: 2rem;
+  text-align: center;
+`;
+
+const Icon = styled("div")`
+  padding-top: 2rem;
+  font-size: 10rem;
   text-align: center;
 `;
 
@@ -33,12 +42,7 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
           <PostDiv key={slug.join("/")}>
             <Link href={`/post/${slug.join("/")}`}>
               <a>
-                <Image
-                  src={`${frontMatter.socialImage}`}
-                  alt={frontMatter.title}
-                  width={640}
-                  height={420}
-                />
+                <Icon>{frontMatter.icon}</Icon>
                 <h2>{frontMatter.title}</h2>
                 <Date dateString={frontMatter.createDate} />
                 {frontMatter.updateDate ? (
