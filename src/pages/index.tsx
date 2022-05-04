@@ -4,9 +4,10 @@ import { ReactElement } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { Slug, Post, getPost, getPostSlugs } from "@/libs/Blog";
-import Date from "@/components/date";
+import DateComponents from "@/components/date";
 import { css } from "@emotion/react";
 import { getLightenColor, getIconColor } from "@/libs/IconColorUtils";
+import _sortBy from "lodash/sortBy";
 
 type Props = {
   posts: Post[];
@@ -51,12 +52,12 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
               <a>
                 <Icon>{frontMatter.icon}</Icon>
                 <h2>{frontMatter.title}</h2>
-                <Date dateString={frontMatter.createDate} />
+                <DateComponents dateString={frontMatter.createDate} />
                 {frontMatter.updateDate ? (
                   <>
                     {"　更新:"}
-                    <Date
-                      dateString={frontMatter.createDate}
+                    <DateComponents
+                      dateString={frontMatter.updateDate}
                       style={{
                         marginLeft: "8px",
                       }}
@@ -84,15 +85,27 @@ Home.getLayout = (page: ReactElement) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const slugs: Slug[] = getPostSlugs();
-  const posts: Post[] = [];
+  let posts: Post[] = [];
   for (let i: number = 0; i < slugs.length; i++) {
     const slug: Slug = slugs[i];
     const { frontMatter } = await getPost(slug);
+
     posts.push({
       slug,
       frontMatter,
     });
   }
+
+  // 記事を更新日順に並び替え
+  posts = _sortBy(posts, (post: Post) => {
+    const targetDate = post.frontMatter.updateDate
+      ? post.frontMatter.updateDate
+      : post.frontMatter.createDate;
+    return new Date(targetDate).getTime();
+  });
+
+  // 記事を新しい順に並び替え
+  posts = posts.reverse();
 
   return {
     props: {
