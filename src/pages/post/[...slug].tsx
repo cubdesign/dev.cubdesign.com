@@ -36,7 +36,7 @@ const Tag = styled("span")`
 
 const Title = styled("h1")`
   margin: 0;
-  padding: 2rem;
+  padding: 2rem 0;
   line-height: 1.3;
   font-size: 2rem;
   display: inline-block;
