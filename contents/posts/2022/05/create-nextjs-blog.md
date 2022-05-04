@@ -18,7 +18,7 @@ tags:
 
 ちびちびカスタマイズしていこうっと。
 
-```js
+```ts
 console.log("OK😄");
 ```
 
@@ -27,3 +27,10 @@ console.log("OK😄");
 [Next.js でブログを作って、動的 OGP も用意した](https://shon0.dev/posts/8r_hksif024a/)
 
 [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app)
+
+## バージョン
+
+```json
+"next": "12.1.5",
+"react": "18.1.0",
+```

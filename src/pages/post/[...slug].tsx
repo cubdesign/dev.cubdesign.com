@@ -43,6 +43,8 @@ const Title = styled("h1")`
 `;
 
 const Body = styled("div")`
+  padding: 1rem 0;
+
   a {
     color: #0062ff;
   }
@@ -52,6 +54,21 @@ const Body = styled("div")`
   a:active {
     border-bottom: solid 1px #0062ff;
     padding-bottom: 1px;
+  }
+
+  p {
+    line-height: 2rem;
+  }
+
+  p > code {
+    color: #c205f1;
+    background-color: #f9ebfc;
+    display: inline-block;
+    white-space: nowrap;
+    padding: 0 1rem;
+    border-radius: 1rem;
+    font-family: "Operator Mono", "Fira Code", Consolas, Monaco, "Andale Mono",
+      "Ubuntu Mono", monospace;
   }
 `;
 
