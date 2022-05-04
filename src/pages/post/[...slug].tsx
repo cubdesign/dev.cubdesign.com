@@ -11,7 +11,6 @@ import {
   getPostSlugs,
   markdownToHtml,
 } from "@/libs/Blog";
-import { after } from "lodash";
 
 type Props = {
   frontMatter: FrontMatter;
