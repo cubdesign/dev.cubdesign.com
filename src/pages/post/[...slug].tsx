@@ -11,6 +11,7 @@ import {
   getPostSlugs,
   markdownToHtml,
 } from "@/libs/Blog";
+import { after } from "lodash";
 
 type Props = {
   frontMatter: FrontMatter;
@@ -68,13 +69,19 @@ const Body = styled("div")`
 
   p > code {
     color: #c205f1;
-    background-color: #f9ebfc;
     display: inline-block;
     white-space: nowrap;
-    padding: 0 1rem;
-    border-radius: 1rem;
+    padding: 0 0.3rem;
     font-family: "Operator Mono", "Fira Code", Consolas, Monaco, "Andale Mono",
       "Ubuntu Mono", monospace;
+
+    &::before {
+      content: "\`";
+    }
+
+    &::after {
+      content: "\`";
+    }
   }
 `;
 
