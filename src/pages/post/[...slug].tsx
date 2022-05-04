@@ -37,9 +37,10 @@ const Tag = styled("span")`
 const Title = styled("h1")`
   margin: 0;
   padding: 2rem;
-  line-height: 1.1;
+  line-height: 1.3;
   font-size: 2rem;
-  text-align: center;
+  display: inline-block;
+  text-align: left;
 `;
 
 const Body = styled("div")`
@@ -81,7 +82,10 @@ const PostPage: NextPageWithLayout<Props> = ({ frontMatter, content }) => {
   return (
     <article>
       <Icon>{frontMatter.icon}</Icon>
-      <Title>{frontMatter.title}</Title>
+      <div style={{ textAlign: "center" }}>
+        <Title>{frontMatter.title}</Title>
+      </div>
+
       <Date dateString={frontMatter.createDate} />
       {frontMatter.updateDate ? (
         <>

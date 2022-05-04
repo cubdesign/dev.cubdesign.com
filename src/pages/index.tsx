@@ -21,10 +21,16 @@ const backgroundDynamicStyle = ({ color }: { color: string }) =>
 
 const PostDiv = styled("div")`
   color: #ffffff;
-  padding: 1rem;
+  padding: 1rem 2rem;
   margin-bottom: 2rem;
   text-align: center;
   ${backgroundDynamicStyle};
+
+  h2 {
+    display: inline-block;
+    text-align: left;
+    line-height: 1.3;
+  }
 `;
 
 const Title = styled("h1")`
@@ -32,7 +38,7 @@ const Title = styled("h1")`
   padding: 2rem;
   line-height: 1.1;
   font-size: 2rem;
-  text-align: center;
+  text-align: left;
 `;
 
 const Icon = styled("div")`
