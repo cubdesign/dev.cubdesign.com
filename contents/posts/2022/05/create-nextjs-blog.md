@@ -24,9 +24,8 @@ console.log("OK😄");
 
 ## 参考サイト
 
-[Next.js でブログを作って、動的 OGP も用意した](https://shon0.dev/posts/8r_hksif024a/)
-
-[Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app)
+- [Next.js でブログを作って、動的 OGP も用意した](https://shon0.dev/posts/8r_hksif024a/)
+- [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app)
 
 ## バージョン
 

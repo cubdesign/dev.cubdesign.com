@@ -14,6 +14,5 @@ apple の emoji 絵文字の色を抽出して背景色を設定したい。
 
 ## 使うライブラリ
 
-[node-vibrant](https://github.com/Vibrant-Colors/node-vibrant)
-
-[emoji-data](https://github.com/iamcal/emoji-data)
+- [node-vibrant](https://github.com/Vibrant-Colors/node-vibrant)
+- [emoji-data](https://github.com/iamcal/emoji-data)
