@@ -89,7 +89,23 @@ vercel の実行は vercel を global インストールしたので、インス
 
 成功！
 
-## Vercel へのデプロイの注意点
+### 日本語フォント
+
+#### ダウンロード
+
+ゴシック体の、Weight は、レギュラーのみをダウンロード。
+ボールド、code 用等幅フォントは使用せず、レギュラーで代用する。
+
+Noto Sans JP
+https://google-webfonts-helper.herokuapp.com/fonts/noto-sans-jp?subsets=japanese,latin
+
+#### フォントを使う
+
+ダウンロードした `.woff2` を使用する。
+
+## デプロイ
+
+### Vercel へのデプロイの注意点
 
 Vercel の Free プランの場合は、そのままだとデプロイできないので vercel.json の `rewrites` のみを残してあとは削除する。
 

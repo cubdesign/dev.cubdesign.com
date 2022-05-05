@@ -55,8 +55,10 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
         <meta
           property="og:image"
           content={`https://og-image.cubdesign.com/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+            title
+          )}.png?theme=dark&fontSize=100px&images=${encodeURI(
+            "https://dev.cubdesign.com/static/favicon/android-chrome-192x192.png"
+          )}&v=1.0.0`}
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
