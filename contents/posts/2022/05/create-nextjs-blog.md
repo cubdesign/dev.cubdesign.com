@@ -33,6 +33,7 @@ console.log("OK😄");
 - [Next.js でブログを作って、動的 OGP も用意した](https://shon0.dev/posts/8r_hksif024a/)
 - [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app)
 - [Next.js で GTM + GA4 を利用する](https://zenn.dev/keitakn/articles/nextjs-google-tag-manager)
+- [Script Component](https://nextjs.org/docs/basic-features/script)
 
 ## バージョン
 

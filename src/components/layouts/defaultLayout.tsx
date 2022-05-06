@@ -35,9 +35,6 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
   return (
     <Container>
       <Head>
-        <GoogleTagManager
-          googleTagManagerId={googleTagManagerId as GoogleTagManagerId}
-        />
         <title>{title}</title>
         <meta name="description" content={description} />
         <link
@@ -71,6 +68,10 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
       </Head>
 
       <Header />
+
+      <GoogleTagManager
+        googleTagManagerId={googleTagManagerId as GoogleTagManagerId}
+      />
 
       <Main>{children}</Main>
 
