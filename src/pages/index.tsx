@@ -57,7 +57,9 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
             <Link href={`/post/${slug.join("/")}`}>
               <a>
                 <Icon>{frontMatter.icon}</Icon>
-                <h2>{frontMatter.title}</h2>
+                <div style={{ textAlign: "center" }}>
+                  <h2>{frontMatter.title}</h2>
+                </div>
                 <DateComponents dateString={frontMatter.createDate} />
                 {frontMatter.updateDate ? (
                   <>
