@@ -3,6 +3,7 @@ title: MacBook 12の画面解像度をディスプレイ設定以上に広げた
 metaTitle: MacBook 12の画面解像度をディスプレイ設定以上に広げたい。
 metaDesc: MacBook 12の画面解像度をディスプレイ設定以上に広げる方法を調べていて専用アプリを使って設定してみた。
 createDate: "2022-05-04 20:00"
+updateDate: "2022-05-07 00:56"
 icon: 💻
 tags:
   - macOS
@@ -12,6 +13,8 @@ tags:
 ## ✍️ この記事は、まだ編集中です。
 
 MacBook 12 の画面解像度をディスプレイ設定以上に広げる方法を調べていて専用アプリを使って設定してみた。
+
+解像アプリを紹介しているページ「[MacBook Pro (2021)のノッチに隠されてしまうメニューバー常駐型アプリは旧 MacBook Pro のアスペクト比に設定することで表示可能。](https://applech2.com/archives/20211112-macbook-pro-notch-glich.html)」を見つけたのでためしてみる。
 
 ## 専用アプリで広げる
 
