@@ -5,6 +5,11 @@ import styled from "@emotion/styled";
 import Head from "next/head";
 import { ReactElement } from "react";
 
+import { googleTagManagerId } from "@/utils/gtm";
+import GoogleTagManager, {
+  GoogleTagManagerId,
+} from "@/components/GoogleTagManager";
+
 const siteTitle: string = "dev.cubdesign.com";
 
 const Container = styled("div")`
@@ -30,9 +35,11 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
   return (
     <Container>
       <Head>
+        <GoogleTagManager
+          googleTagManagerId={googleTagManagerId as GoogleTagManagerId}
+        />
         <title>{title}</title>
         <meta name="description" content={description} />
-
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -51,7 +58,6 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
           href="/static/favicon/favicon-16x16.png"
         />
         <link rel="manifest" href="/static/favicon/site.webmanifest" />
-
         <meta
           property="og:image"
           content={`https://og-image.cubdesign.com/${encodeURI(
