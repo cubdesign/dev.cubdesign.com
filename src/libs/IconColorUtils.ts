@@ -17,6 +17,9 @@ const getIconColor = (icon: string): string => {
     case "🤹‍♀️":
       color = "#9a0404";
       break;
+    case "😓":
+      color = "#0034d0";
+      break;
 
     default:
       color = "#000000";
