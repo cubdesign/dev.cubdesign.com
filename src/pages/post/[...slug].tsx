@@ -6,10 +6,12 @@ import Date from "@/components/date";
 
 import {
   Slug,
+  Post,
   FrontMatter,
   getPost,
   getPostSlugs,
   markdownToHtml,
+  isPublic,
 } from "@/libs/Blog";
 
 type Props = {
@@ -129,13 +131,22 @@ PostPage.getLayout = (page: ReactElement) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getPostSlugs().map((slug: Slug) => {
-    return {
-      params: {
-        slug: slug,
-      },
-    };
-  });
+  const slugs: Slug[] = getPostSlugs();
+  let paths = [];
+
+  for (let i: number = 0; i < slugs.length; i++) {
+    const slug: Slug = slugs[i];
+    //  FIXME: 効率が悪い。記事を表示するたび毎回呼ばれるので、記事を修正したら毎回全記事読み込むことになる
+    const post = await getPost(slug);
+    if (isPublic(post)) {
+      paths.push({
+        params: {
+          slug: slug,
+        },
+      });
+    }
+  }
+
   return {
     paths,
     fallback: false,

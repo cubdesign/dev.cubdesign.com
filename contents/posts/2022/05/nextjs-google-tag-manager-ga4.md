@@ -4,6 +4,7 @@ metaTitle: Next.jsでGoogle Tag Manager経由でGoogle Analytics v4の設定を�
 metaDesc: Next.jsでGoogle Tag Manager経由でGoogle Analytics v4の設定をしてハマった。
 createDate: "2022-05-06 23:00"
 updateDate: "2022-05-13 22:11"
+status: open
 icon: 😓
 tags:
   - Next.js

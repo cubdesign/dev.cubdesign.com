@@ -4,6 +4,7 @@ metaTitle: Next.js og-image
 metaDesc: Next.js og-image
 createDate: "2022-05-04 12:00"
 updateDate: "2022-05-13 22:18"
+status: publish
 icon: 🧑‍🏫
 tags:
   - Next.js

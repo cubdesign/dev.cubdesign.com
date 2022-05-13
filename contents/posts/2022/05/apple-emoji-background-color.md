@@ -4,6 +4,7 @@ metaTitle: appleのemoji絵文字の色を抽出して背景色を設定した�
 metaDesc: appleのemoji絵文字の色を抽出して背景色を設定したい
 createDate: "2022-05-04 23:00"
 updateDate: "2022-05-13 22:21"
+status: open
 icon: 🤹‍♀️
 tags:
   - React.js

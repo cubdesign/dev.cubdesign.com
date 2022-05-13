@@ -3,7 +3,7 @@ import { GetStaticProps, NextPageWithLayout } from "next";
 import { ReactElement } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
-import { Slug, Post, getPost, getPostSlugs } from "@/libs/Blog";
+import { Slug, Post, getPost, getPostSlugs, isPublic } from "@/libs/Blog";
 import DateComponents from "@/components/date";
 import { css } from "@emotion/react";
 import { getLightenColor, getIconColor } from "@/libs/IconColorUtils";
@@ -96,12 +96,12 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   let posts: Post[] = [];
   for (let i: number = 0; i < slugs.length; i++) {
     const slug: Slug = slugs[i];
-    const { frontMatter } = await getPost(slug);
 
-    posts.push({
-      slug,
-      frontMatter,
-    });
+    const post = await getPost(slug);
+
+    if (isPublic(post)) {
+      posts.push(post);
+    }
   }
 
   // 記事を更新日順に並び替え

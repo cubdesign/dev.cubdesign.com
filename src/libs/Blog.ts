@@ -10,6 +10,8 @@ import autolink from "rehype-autolink-headings";
 import stringify from "rehype-stringify";
 import prism from "@mapbox/rehype-prism";
 
+export type PostStatus = "publish" | "draft" | "open" | "close";
+
 export type Slug = string[];
 
 export type FrontMatter = {
@@ -19,6 +21,7 @@ export type FrontMatter = {
   socialImage?: string;
   createDate: string;
   updateDate?: string;
+  status: PostStatus;
   icon: string;
   tags?: string[];
 };
@@ -26,6 +29,7 @@ export type FrontMatter = {
 export type Post = {
   slug: Slug;
   frontMatter: FrontMatter;
+  content: string;
 };
 
 const getPostSlugs = () => {
@@ -40,16 +44,28 @@ const getPostSlugs = () => {
   return slugs;
 };
 
-const getPost = async (slug: string[]) => {
+const getPost = async (slug: string[]): Promise<Post> => {
   const fileName: string = fs.readFileSync(
     `contents/posts/${slug.join("/")}.md`,
     "utf-8"
   );
   const matterResult = matter(fileName);
   return {
+    slug,
     frontMatter: matterResult.data as FrontMatter,
     content: matterResult.content,
   };
+};
+/**
+ * ドラフトは除く（CAN_PREVIEW: trueの場合は除かない）
+ *
+ * @param post
+ * @returns
+ */
+const isPublic = (post: Post): boolean => {
+  return (
+    process.env.CAN_PREVIEW === "true" || post.frontMatter.status !== "draft"
+  );
 };
 
 const markdownToHtml = async (content: string) => {
@@ -90,8 +106,8 @@ const markdownToHtml = async (content: string) => {
     .process(content);
 };
 
-export { getPostSlugs, getPost, markdownToHtml };
+export { getPostSlugs, getPost, isPublic, markdownToHtml };
 
-const Blog = { getPostSlugs, getPost, markdownToHtml };
+const Blog = { getPostSlugs, getPost, isPublic, markdownToHtml };
 
 export default Blog;
