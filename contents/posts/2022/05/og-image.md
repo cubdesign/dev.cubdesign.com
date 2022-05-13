@@ -3,13 +3,18 @@ title: Next.js og-image
 metaTitle: Next.js og-image
 metaDesc: Next.js og-image
 createDate: "2022-05-04 12:00"
-updateDate: "2022-05-05 19:23"
+updateDate: "2022-05-13 22:18"
 icon: 🧑‍🏫
 tags:
   - Next.js
 ---
 
 ## ✍️ この記事は、まだ編集中です。
+
+### TODO
+
+- [ ] 出来上がった `og-image` の説明。
+- [ ] 出来上がった `dot-dom` について
 
 Next.js の Blog のチュートリアルを見ていると、OG 画像をサーバーで自動生成している部分を見つけた。なんろうって調べてみると、Vercel がプログラムを公開していた。そのままだと日本語が使えなかったので日本語が使えるように修正してみた。
 
