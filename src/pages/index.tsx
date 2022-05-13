@@ -13,6 +13,14 @@ type Props = {
   posts: Post[];
 };
 
+const Title = styled("h1")`
+  margin: 0;
+  padding: 2rem;
+  line-height: 1.1;
+  font-size: 2rem;
+  text-align: left;
+`;
+
 const backgroundDynamicStyle = ({ color }: { color: string }) =>
   css`
     border: solid 3px ${getLightenColor(color)};
@@ -25,20 +33,16 @@ const PostDiv = styled("div")`
   margin-bottom: 2rem;
   text-align: center;
   ${backgroundDynamicStyle};
-
-  h2 {
-    display: inline-block;
-    text-align: left;
-    line-height: 1.3;
-  }
 `;
 
-const Title = styled("h1")`
-  margin: 0;
-  padding: 2rem;
-  line-height: 1.1;
-  font-size: 2rem;
+const PostTitleWrapper = styled("div")`
+  text-align: center;
+`;
+
+const PostTitle = styled("h2")`
+  display: inline-block;
   text-align: left;
+  line-height: 1.3;
 `;
 
 const Icon = styled("div")`
@@ -57,9 +61,9 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
             <Link href={`/post/${slug.join("/")}`}>
               <a>
                 <Icon>{frontMatter.icon}</Icon>
-                <div style={{ textAlign: "center" }}>
-                  <h2>{frontMatter.title}</h2>
-                </div>
+                <PostTitleWrapper>
+                  <PostTitle>{frontMatter.title}</PostTitle>
+                </PostTitleWrapper>
                 <DateComponents dateString={frontMatter.createDate} />
                 {frontMatter.updateDate ? (
                   <>

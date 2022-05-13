@@ -14,6 +14,8 @@ import {
   isPublic,
 } from "@/libs/Blog";
 
+import Tags from "@/components/blog/tags";
+
 type Props = {
   frontMatter: FrontMatter;
   content: any;
@@ -29,14 +31,11 @@ const Icon = styled("div")`
   text-align: center;
 `;
 
-const Tag = styled("span")`
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
-  border: solid 1px #dfdfdf;
-  border-radius: 50px;
+const PostTitleWrapper = styled("div")`
+  text-align: center;
 `;
 
-const Title = styled("h1")`
+const PostTitle = styled("h1")`
   margin: 0;
   padding: 2rem 0;
   line-height: 1.3;
@@ -45,7 +44,9 @@ const Title = styled("h1")`
   text-align: left;
 `;
 
-const Body = styled("div")`
+const ArticleHeader = styled("div")``;
+
+const ArticleBody = styled("div")`
   padding: 1rem 0;
 
   h2 {
@@ -89,31 +90,28 @@ const Body = styled("div")`
 const PostPage: NextPageWithLayout<Props> = ({ frontMatter, content }) => {
   return (
     <article>
-      <Icon>{frontMatter.icon}</Icon>
-      <div style={{ textAlign: "center" }}>
-        <Title>{frontMatter.title}</Title>
-      </div>
-
-      <Date dateString={frontMatter.createDate} />
-      {frontMatter.updateDate ? (
-        <>
-          {"　更新:"}
-          <Date
-            dateString={frontMatter.createDate}
-            style={{
-              marginLeft: "8px",
-            }}
-          />
-        </>
-      ) : (
-        ""
-      )}
-
-      {frontMatter.tags?.map((tag: string, index: number) => {
-        return <Tag key={index}>{tag}</Tag>;
-      })}
-
-      <Body dangerouslySetInnerHTML={{ __html: content }} />
+      <ArticleHeader>
+        <Icon>{frontMatter.icon}</Icon>
+        <PostTitleWrapper>
+          <PostTitle>{frontMatter.title}</PostTitle>
+        </PostTitleWrapper>
+        <Date dateString={frontMatter.createDate} />
+        {frontMatter.updateDate ? (
+          <>
+            {"　更新:"}
+            <Date
+              dateString={frontMatter.createDate}
+              style={{
+                marginLeft: "8px",
+              }}
+            />
+          </>
+        ) : (
+          ""
+        )}
+        {frontMatter.tags ? <Tags tags={frontMatter.tags} /> : ""}
+      </ArticleHeader>
+      <ArticleBody dangerouslySetInnerHTML={{ __html: content }} />
     </article>
   );
 };
