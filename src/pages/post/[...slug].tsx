@@ -15,6 +15,7 @@ import {
 } from "@/libs/Blog";
 
 import Tags from "@/components/blog/tags";
+import PostDate from "@/components/blog/postDate";
 
 type Props = {
   frontMatter: FrontMatter;
@@ -44,7 +45,14 @@ const PostTitle = styled("h1")`
   text-align: left;
 `;
 
-const ArticleHeader = styled("div")``;
+const TagsWrapper = styled("div")`
+  text-align: center;
+  margin-top: 1rem;
+`;
+
+const ArticleHeader = styled("div")`
+  text-align: center;
+`;
 
 const ArticleBody = styled("div")`
   padding: 1rem 0;
@@ -92,24 +100,23 @@ const PostPage: NextPageWithLayout<Props> = ({ frontMatter, content }) => {
     <article>
       <ArticleHeader>
         <Icon>{frontMatter.icon}</Icon>
+
         <PostTitleWrapper>
           <PostTitle>{frontMatter.title}</PostTitle>
         </PostTitleWrapper>
-        <Date dateString={frontMatter.createDate} />
-        {frontMatter.updateDate ? (
-          <>
-            {"　更新:"}
-            <Date
-              dateString={frontMatter.createDate}
-              style={{
-                marginLeft: "8px",
-              }}
-            />
-          </>
+
+        <PostDate
+          createDate={frontMatter.createDate}
+          updateDate={frontMatter.updateDate}
+        />
+
+        {frontMatter.tags ? (
+          <TagsWrapper>
+            <Tags tags={frontMatter.tags} />
+          </TagsWrapper>
         ) : (
           ""
         )}
-        {frontMatter.tags ? <Tags tags={frontMatter.tags} /> : ""}
       </ArticleHeader>
       <ArticleBody dangerouslySetInnerHTML={{ __html: content }} />
     </article>

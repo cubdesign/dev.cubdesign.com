@@ -4,10 +4,10 @@ import { ReactElement } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { Slug, Post, getPost, getPostSlugs, isPublic } from "@/libs/Blog";
-import DateComponents from "@/components/date";
 import { css } from "@emotion/react";
 import { getLightenColor, getIconColor } from "@/libs/IconColorUtils";
 import _sortBy from "lodash/sortBy";
+import PostDate from "@/components/blog/postDate";
 
 type Props = {
   posts: Post[];
@@ -64,20 +64,11 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
                 <PostTitleWrapper>
                   <PostTitle>{frontMatter.title}</PostTitle>
                 </PostTitleWrapper>
-                <DateComponents dateString={frontMatter.createDate} />
-                {frontMatter.updateDate ? (
-                  <>
-                    {"　更新:"}
-                    <DateComponents
-                      dateString={frontMatter.updateDate}
-                      style={{
-                        marginLeft: "8px",
-                      }}
-                    />
-                  </>
-                ) : (
-                  ""
-                )}
+
+                <PostDate
+                  createDate={frontMatter.createDate}
+                  updateDate={frontMatter.updateDate}
+                />
               </a>
             </Link>
           </PostDiv>
