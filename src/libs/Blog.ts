@@ -32,12 +32,12 @@ export type Post = {
   content: string;
 };
 
-const getPostSlugs = () => {
+const getPostSlugs = (): Slug[] => {
   const files: string[] = glob.sync(`contents/posts/**/*.md`);
-  const slugs = files.map((filePath: string) => {
+  const slugs: Slug[] = files.map((filePath: string) => {
     // [ 'contents', 'posts', '2022', 'post2' ]の[ 'contents', 'posts' ]を除去する
     // TODO ここのロジックを綺麗にする
-    const slug = filePath.replace(".md", "").split("/").splice(2, 10);
+    const slug: Slug = filePath.replace(".md", "").split("/").splice(2, 10);
     return slug;
   });
 
@@ -56,6 +56,7 @@ const getPost = async (slug: string[]): Promise<Post> => {
     content: matterResult.content,
   };
 };
+
 /**
  * ドラフトは除く（CAN_PREVIEW: trueの場合は除かない）
  *
