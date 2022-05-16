@@ -6,5 +6,5 @@ createDate: "2022-05-13 22:41"
 status: draft
 icon: 💻
 tags:
-  - Next.js
+  - 買ったもの
 ---
