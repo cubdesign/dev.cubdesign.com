@@ -8,6 +8,7 @@ import { css } from "@emotion/react";
 import { getLightenColor, getIconColor } from "@/libs/IconColorUtils";
 import _sortBy from "lodash/sortBy";
 import PostDate from "@/components/blog/postDate";
+import { getVisibleTitle } from "@/utils/blogUtils";
 
 type Props = {
   posts: Post[];
@@ -55,19 +56,22 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
   return (
     <>
       <Title>Welcome to dev.cubdesign.com</Title>
-      {posts.map(({ slug, frontMatter }) => {
+      {posts.map((post) => {
         return (
-          <PostDiv key={slug.join("/")} color={getIconColor(frontMatter.icon)}>
-            <Link href={`/post/${slug.join("/")}`}>
+          <PostDiv
+            key={post.slug.join("/")}
+            color={getIconColor(post.frontMatter.icon)}
+          >
+            <Link href={`/post/${post.slug.join("/")}`}>
               <a>
-                <Icon>{frontMatter.icon}</Icon>
+                <Icon>{post.frontMatter.icon}</Icon>
                 <PostTitleWrapper>
-                  <PostTitle>{frontMatter.title}</PostTitle>
+                  <PostTitle>{getVisibleTitle(post)}</PostTitle>
                 </PostTitleWrapper>
 
                 <PostDate
-                  createDate={frontMatter.createDate}
-                  updateDate={frontMatter.updateDate}
+                  createDate={post.frontMatter.createDate}
+                  updateDate={post.frontMatter.updateDate}
                 />
               </a>
             </Link>

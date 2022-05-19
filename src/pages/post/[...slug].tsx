@@ -2,7 +2,6 @@ import { GetStaticPaths, GetStaticProps, NextPageWithLayout } from "next";
 import { ReactElement } from "react";
 import DefaultLayout from "@/components/layouts/defaultLayout";
 import styled from "@emotion/styled";
-import Date from "@/components/date";
 
 import {
   Slug,
@@ -16,10 +15,11 @@ import {
 
 import Tags from "@/components/blog/tags";
 import PostDate from "@/components/blog/postDate";
+import { getVisibleTitle } from "@/utils/blogUtils";
 
 type Props = {
-  frontMatter: FrontMatter;
-  content: any;
+  post: Post;
+  contentHtml: any;
 };
 
 type Params = {
@@ -95,40 +95,40 @@ const ArticleBody = styled("div")`
   }
 `;
 
-const PostPage: NextPageWithLayout<Props> = ({ frontMatter, content }) => {
+const PostPage: NextPageWithLayout<Props> = ({ post, contentHtml }) => {
   return (
     <article>
       <ArticleHeader>
-        <Icon>{frontMatter.icon}</Icon>
+        <Icon>{post.frontMatter.icon}</Icon>
 
         <PostTitleWrapper>
-          <PostTitle>{frontMatter.title}</PostTitle>
+          <PostTitle>{getVisibleTitle(post)}</PostTitle>
         </PostTitleWrapper>
 
         <PostDate
-          createDate={frontMatter.createDate}
-          updateDate={frontMatter.updateDate}
+          createDate={post.frontMatter.createDate}
+          updateDate={post.frontMatter.updateDate}
         />
 
-        {frontMatter.tags ? (
+        {post.frontMatter.tags ? (
           <TagsWrapper>
-            <Tags tags={frontMatter.tags} />
+            <Tags tags={post.frontMatter.tags} />
           </TagsWrapper>
         ) : (
           ""
         )}
       </ArticleHeader>
-      <ArticleBody dangerouslySetInnerHTML={{ __html: content }} />
+      <ArticleBody dangerouslySetInnerHTML={{ __html: contentHtml }} />
     </article>
   );
 };
 
 PostPage.getLayout = (page: ReactElement) => {
-  const { frontMatter }: Props = page.props;
+  const { post }: Props = page.props;
   return (
     <DefaultLayout
-      title={frontMatter.metaTitle}
-      description={frontMatter.metaTitle}
+      title={post.frontMatter.metaTitle}
+      description={post.frontMatter.metaTitle}
     >
       {page}
     </DefaultLayout>
@@ -162,12 +162,12 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
   if (!params?.slug) throw new Error("Missing slug params");
-  const { frontMatter, content } = await getPost(params.slug);
-  const html = await markdownToHtml(content);
+  const post = await getPost(params.slug);
+  const contentHtml = await markdownToHtml(post.content);
   return {
     props: {
-      frontMatter,
-      content: html.toString(),
+      post: post,
+      contentHtml: contentHtml.toString(),
     },
   };
 };

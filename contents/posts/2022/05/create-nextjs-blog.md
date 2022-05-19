@@ -4,7 +4,7 @@ metaTitle: Next.jsでブログを作った。
 metaDesc: 久しぶりのReact。Next.jsでブログを作った話。
 createDate: "2022-05-01 14:00"
 updateDate: "2022-05-13 23:58"
-status: open
+status: publish
 icon: 👾
 tags:
   - Next.js

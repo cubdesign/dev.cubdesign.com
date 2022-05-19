@@ -109,6 +109,11 @@ const markdownToHtml = async (content: string) => {
 
 export { getPostSlugs, getPost, isPublic, markdownToHtml };
 
-const Blog = { getPostSlugs, getPost, isPublic, markdownToHtml };
+const Blog = {
+  getPostSlugs,
+  getPost,
+  isPublic,
+  markdownToHtml,
+};
 
 export default Blog;
