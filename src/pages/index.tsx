@@ -9,6 +9,7 @@ import { getLightenColor, getIconColor } from "@/libs/IconColorUtils";
 import _sortBy from "lodash/sortBy";
 import PostDate from "@/components/blog/postDate";
 import { getVisibleTitle } from "@/utils/blogUtils";
+import { mq } from "@/utils/mq";
 
 type Props = {
   posts: Post[];
@@ -29,11 +30,29 @@ const backgroundDynamicStyle = ({ color }: { color: string }) =>
   `;
 
 const PostDiv = styled("div")`
+  display: flex;
+  flex-direction: column;
   color: #ffffff;
-  padding: 1rem 2rem;
   margin-bottom: 2rem;
   text-align: center;
   ${backgroundDynamicStyle};
+
+  ${mq("sm")} {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+`;
+
+const PostDivHeader = styled("div")`
+  padding: 1rem 2rem 0 2rem;
+`;
+const PostDivBody = styled("div")`
+  padding: 0 2rem 1rem 2rem;
+
+  ${mq("sm")} {
+    padding-left: 0;
+  }
 `;
 
 const PostTitleWrapper = styled("div")`
@@ -50,6 +69,10 @@ const Icon = styled("div")`
   padding-top: 2rem;
   font-size: 10rem;
   text-align: center;
+  ${mq("sm")} {
+    padding-top: 0;
+    font-size: 7rem;
+  }
 `;
 
 const Home: NextPageWithLayout<Props> = ({ posts }) => {
@@ -58,24 +81,25 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
       <Title>Welcome to dev.cubdesign.com</Title>
       {posts.map((post) => {
         return (
-          <PostDiv
-            key={post.slug.join("/")}
-            color={getIconColor(post.frontMatter.icon)}
-          >
-            <Link href={`/post/${post.slug.join("/")}`}>
-              <a>
-                <Icon>{post.frontMatter.icon}</Icon>
-                <PostTitleWrapper>
-                  <PostTitle>{getVisibleTitle(post)}</PostTitle>
-                </PostTitleWrapper>
+          <Link href={`/post/${post.slug.join("/")}`} key={post.slug.join("/")}>
+            <a>
+              <PostDiv color={getIconColor(post.frontMatter.icon)}>
+                <PostDivHeader>
+                  <Icon>{post.frontMatter.icon}</Icon>
+                </PostDivHeader>
+                <PostDivBody>
+                  <PostTitleWrapper>
+                    <PostTitle>{getVisibleTitle(post)}</PostTitle>
+                  </PostTitleWrapper>
 
-                <PostDate
-                  createDate={post.frontMatter.createDate}
-                  updateDate={post.frontMatter.updateDate}
-                />
-              </a>
-            </Link>
-          </PostDiv>
+                  <PostDate
+                    createDate={post.frontMatter.createDate}
+                    updateDate={post.frontMatter.updateDate}
+                  />
+                </PostDivBody>
+              </PostDiv>
+            </a>
+          </Link>
         );
       })}
     </>
