@@ -3,11 +3,11 @@ title: appleのemoji絵文字の色を抽出して背景色を設定したい
 metaTitle: appleのemoji絵文字の色を抽出して背景色を設定したい
 metaDesc: appleのemoji絵文字の色を抽出して背景色を設定したい
 createDate: "2022-05-04 23:00"
-updateDate: "2022-05-21 01:31"
+updateDate: "2022-05-21 21:34"
 status: open
 icon: 🤹‍♀️
 tags:
-  - React.js
+  - React.js, macOS
 ---
 
 ## ✍️ この記事は、まだ編集中です。
@@ -21,6 +21,9 @@ tags:
 apple の emoji 絵文字の色を抽出して背景色を設定したい。
 
 とりあえず、写真で色を取得するコードを書いた
+https://node-vibrant-example.vercel.app/
+
+apple 絵文字から色を抽出できた
 https://node-vibrant-example.vercel.app/
 
 ## 使うライブラリ
