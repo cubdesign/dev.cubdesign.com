@@ -30,3 +30,4 @@ https://node-vibrant-example.vercel.app/
 
 - [node-vibrant](https://github.com/Vibrant-Colors/node-vibrant)
 - [emoji-data](https://github.com/iamcal/emoji-data)
+- [twemoji-parser](https://github.com/twitter/twemoji-parser)
