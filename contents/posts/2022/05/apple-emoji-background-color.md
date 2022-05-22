@@ -26,6 +26,14 @@ https://node-vibrant-example.vercel.app/
 apple 絵文字から色を抽出できた
 https://node-vibrant-example.vercel.app/
 
+コードを追加していると、`CreateListFromArrayLike called on non-object`の`worker.js`エラーがめちゃくちゃでて、原因不明で悩んでいたところ、バージョン問題だった。バージョンを変更したらエラーがでなくなった。（2022.05.22 時点）
+
+`"node-vibrant": "^3.2.1-alpha.1"` -> `"node-vibrant": "^3.1.6"`
+
+詳しくは、ここ ↓
+
+https://github.com/Vibrant-Colors/node-vibrant/issues/113
+
 ## 使うライブラリ
 
 - [node-vibrant](https://github.com/Vibrant-Colors/node-vibrant)
