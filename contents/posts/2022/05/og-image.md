@@ -3,7 +3,7 @@ title: Next.js og-image
 metaTitle: Next.js og-image
 metaDesc: Next.js og-image
 createDate: "2022-05-04 12:00"
-updateDate: "2022-05-13 22:18"
+updateDate: "2022-06-05 19:37"
 status: open
 icon: 🧑‍🏫
 tags:
@@ -94,6 +94,8 @@ vercel の実行は vercel を global インストールしたので、インス
 ハマった。
 
 成功！
+
+↑ 2022-06-05 別の Mac でエラーが解決しなかった 😓。
 
 ### 日本語フォント
 
