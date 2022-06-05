@@ -93,6 +93,13 @@ const ArticleBody = styled("div")`
       content: "\`";
     }
   }
+  blockquote {
+    border-left: 5px solid #ddd;
+    color: #777;
+    padding: 1em;
+    padding-right: 0;
+    margin: 1.5em 0;
+  }
 `;
 
 const PostPage: NextPageWithLayout<Props> = ({ post, contentHtml }) => {

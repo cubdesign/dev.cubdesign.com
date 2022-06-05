@@ -3,7 +3,7 @@ title: Next.js og-image
 metaTitle: Next.js og-image
 metaDesc: Next.js og-image
 createDate: "2022-05-04 12:00"
-updateDate: "2022-06-05 19:37"
+updateDate: "2022-06-05 22:28"
 status: open
 icon: 🧑‍🏫
 tags:
@@ -87,15 +87,56 @@ vercel の実行は vercel を global インストールしたので、インス
 
 エラー変わらず！
 
-#### 🟢 エラーの検証 その 2
+#### 🔴 エラーの検証 その 2
 
 原因がわかった。最初インストールした際、`npm i -g vercel` で、npm で global にインストールしていた。一度、 `npm uninstall -g vercel` でインインストールして、`yarn global add vercel` して、yarn で global にインストールしたら、エラーが無くなった。
 
 ハマった。
 
+成功！したと思ったが、
+
+別の Mac でエラーが解決しなかった 😓。
+多分、エラー検証　その１で デフォルト（グローバル） の Node.js を `node@14.x` に変更していたので上手くいっていたよう。
+
+#### 🟢 エラーの検証 その 3
+
+デフォルト（グローバル）の Node.js が、`node@16.14.2` の環境で`vercel`を global インストールしたので、`vercel`が`node@16.14.2`が紐付いていた。この紐付きは、インストール時に固定され変更されない。なので、`node@14.x`のプロジェクト内で`vercel`を実行しても`node@16.14.2`で実行される。エラーの原因はこれ！
+
+解決方法は、プロジェクトの Node.js を`node@14.x`にしたうえで`vercel`を local インストールする。
+
 成功！
 
-↑ 2022-06-05 別の Mac でエラーが解決しなかった 😓。
+確認は、コマンドで確認する。
+
+```bash
+$ volta list all
+
+⚡️ User toolchain:
+
+    Node runtimes:
+        v14.19.2 (current @ /Users/takeo/src/cubdesign/og-image/package.json)
+        v14.19.3
+        v16.15.0
+        v16.15.1 (default)
+
+    Package managers:
+        Yarn:
+            v1.22.18 (default)
+
+    Packages:
+        vercel (current @ /Users/takeo/src/cubdesign/og-image/package.json)
+            binary tools: vc, vercel
+```
+
+↓ これ！ Volta の記事を読んで理解した。
+
+[Windows 側になるべく実行環境作りたくなかったやつが、Volta でバージョン管理できる Node.js 環境を作ってみた](https://zenn.dev/h_yoshikawa0724/articles/2021-11-09-volta)
+
+ハマった。
+
+> グローバルインストールしたものとローカルインストールしたものとで、同名の npm パッケージが存在していた場合、ローカルの方を優先して使うよ。 .....
+> また、グローバルインストールした npm パッケージは、インストール時のデフォルト（グローバル）バージョンである Node.js と関連付けられます。
+> この npm パッケージを、グローバルバージョンとして使用する際は、この関連付けられた Node.js が使われるようになっているそうです。
 
 ### 日本語フォント
 
