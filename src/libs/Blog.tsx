@@ -24,6 +24,7 @@ export type FrontMatter = {
   status: PostStatus;
   icon: string;
   tags?: string[];
+  canonical?: string;
 };
 
 export type Post = {

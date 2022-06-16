@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps, NextPageWithLayout } from "next";
 import { ReactElement } from "react";
 import DefaultLayout from "@/components/layouts/defaultLayout";
 import styled from "@emotion/styled";
+import Head from "next/head";
 
 import {
   Slug,
@@ -100,33 +101,48 @@ const ArticleBody = styled("div")`
     padding-right: 0;
     margin: 1.5em 0;
   }
+
+  img {
+    max-width: 100%;
+  }
 `;
 
 const PostPage: NextPageWithLayout<Props> = ({ post, contentHtml }) => {
+  const { canonical } = post.frontMatter;
+
   return (
-    <article>
-      <ArticleHeader>
-        <Icon>{post.frontMatter.icon}</Icon>
+    <>
+      {canonical ? (
+        <Head>
+          <link rel="canonical" href={canonical} />
+        </Head>
+      ) : (
+        ""
+      )}
+      <article>
+        <ArticleHeader>
+          <Icon>{post.frontMatter.icon}</Icon>
 
-        <PostTitleWrapper>
-          <PostTitle>{getVisibleTitle(post)}</PostTitle>
-        </PostTitleWrapper>
+          <PostTitleWrapper>
+            <PostTitle>{getVisibleTitle(post)}</PostTitle>
+          </PostTitleWrapper>
 
-        <PostDate
-          createDate={post.frontMatter.createDate}
-          updateDate={post.frontMatter.updateDate}
-        />
+          <PostDate
+            createDate={post.frontMatter.createDate}
+            updateDate={post.frontMatter.updateDate}
+          />
 
-        {post.frontMatter.tags ? (
-          <TagsWrapper>
-            <Tags tags={post.frontMatter.tags} />
-          </TagsWrapper>
-        ) : (
-          ""
-        )}
-      </ArticleHeader>
-      <ArticleBody dangerouslySetInnerHTML={{ __html: contentHtml }} />
-    </article>
+          {post.frontMatter.tags ? (
+            <TagsWrapper>
+              <Tags tags={post.frontMatter.tags} />
+            </TagsWrapper>
+          ) : (
+            ""
+          )}
+        </ArticleHeader>
+        <ArticleBody dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      </article>
+    </>
   );
 };
 
