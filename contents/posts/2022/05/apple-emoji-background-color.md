@@ -3,7 +3,7 @@ title: appleのemoji絵文字の色を抽出して背景色を設定したい
 metaTitle: appleのemoji絵文字の色を抽出して背景色を設定したい
 metaDesc: appleのemoji絵文字の色を抽出して背景色を設定したい
 createDate: "2022-05-04 23:00"
-updateDate: "2022-05-22 22:48"
+updateDate: "2022-06-16 12:51"
 status: open
 icon: 🤹‍♀️
 tags:
@@ -21,10 +21,10 @@ tags:
 apple の emoji 絵文字の色を抽出して背景色を設定したい。
 
 とりあえず、写真で色を取得するコードを書いた
-https://node-vibrant-example.vercel.app/
+https://node-vibrant-example.cubdesign.com/
 
 apple 絵文字から色を抽出できた
-https://node-vibrant-example.vercel.app/
+https://node-vibrant-example.cubdesign.com/
 
 コードを追加していると、`CreateListFromArrayLike called on non-object`の`worker.js`エラーがめちゃくちゃでて、原因不明で悩んでいたところ、バージョン問題だった。バージョンを変更したらエラーがでなくなった。（2022.05.22 時点）
 
