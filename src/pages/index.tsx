@@ -10,7 +10,6 @@ import {
   getEmojiColorsFromAPI,
   EmojiColor,
   EmojiColorDictionary,
-  getVibrantColor,
   getEmojiBackgroundColor,
 } from "@/libs/IconColorUtils";
 import _sortBy from "lodash/sortBy";
@@ -43,6 +42,11 @@ const PostDiv = styled("div")`
   margin-bottom: 2rem;
   text-align: center;
   ${backgroundDynamicStyle};
+
+  transition-property: background-color, border-color, text-decoration-color,
+    fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 
   ${mq("sm")} {
     flex-direction: row;
@@ -106,6 +110,13 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
     getColor();
   }, [posts]);
 
+  const getEmojiBackgroundColorFromDictionary = (emoji: string): string => {
+    if (emojiColorDictionary[emoji]) {
+      return getEmojiBackgroundColor(emojiColorDictionary[emoji]);
+    } else {
+      return "#ffffff";
+    }
+  };
   return (
     <>
       <Title>Welcome to dev.cubdesign.com</Title>
@@ -113,7 +124,11 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
         return (
           <Link href={`/post/${post.slug.join("/")}`} key={post.slug.join("/")}>
             <a>
-              <PostDiv color={emojiColorDictionary[post.frontMatter.icon]}>
+              <PostDiv
+                color={getEmojiBackgroundColorFromDictionary(
+                  post.frontMatter.icon
+                )}
+              >
                 <PostDivHeader>
                   <Icon>{post.frontMatter.icon}</Icon>
                 </PostDivHeader>
