@@ -1,14 +1,19 @@
 import DefaultLayout from "@/components/layouts/defaultLayout";
 import { GetStaticProps, NextPageWithLayout } from "next";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { Slug, Post, getPost, getPostSlugs, isPublic } from "@/libs/Blog";
 import { css } from "@emotion/react";
-import { getLightenColor, getIconColor } from "@/libs/IconColorUtils";
+import {
+  getLightenColor,
+  getEmojiColorsFromAPI,
+  EmojiColor,
+  EmojiColorDictionary,
+} from "@/libs/IconColorUtils";
 import _sortBy from "lodash/sortBy";
 import PostDate from "@/components/blog/postDate";
-import { getVisibleTitle } from "@/utils/blogUtils";
+import { getUI, getVisibleTitle } from "@/utils/blogUtils";
 import { mq } from "@/utils/mq";
 
 type Props = {
@@ -76,6 +81,29 @@ const Icon = styled("div")`
 `;
 
 const Home: NextPageWithLayout<Props> = ({ posts }) => {
+  const [emojiColorDictionary, setEmojiColorDictionary] =
+    useState<EmojiColorDictionary>({});
+
+  useEffect(() => {
+    if (posts.length === 0) return;
+    const getColor = async () => {
+      const emojis: string = posts.reduce((acc, post) => {
+        return acc + post.frontMatter.icon;
+      }, "");
+      const ua: string = getUI();
+      const emojiColor: EmojiColor[] = await getEmojiColorsFromAPI(emojis, ua);
+      const emojiColorsDictionary: EmojiColorDictionary = emojiColor.reduce(
+        (dict: EmojiColorDictionary, emojiColor: EmojiColor) => {
+          dict[emojiColor.emoji] = emojiColor.color;
+          return dict;
+        },
+        {}
+      );
+      setEmojiColorDictionary(emojiColorsDictionary);
+    };
+    getColor();
+  }, [posts]);
+
   return (
     <>
       <Title>Welcome to dev.cubdesign.com</Title>
@@ -83,7 +111,7 @@ const Home: NextPageWithLayout<Props> = ({ posts }) => {
         return (
           <Link href={`/post/${post.slug.join("/")}`} key={post.slug.join("/")}>
             <a>
-              <PostDiv color={getIconColor(post.frontMatter.icon)}>
+              <PostDiv color={emojiColorDictionary[post.frontMatter.icon]}>
                 <PostDivHeader>
                   <Icon>{post.frontMatter.icon}</Icon>
                 </PostDivHeader>

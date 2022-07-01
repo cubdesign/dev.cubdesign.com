@@ -44,10 +44,15 @@ const getVisibleTitle = (post: Post): JSX.Element => {
   );
 };
 
-export { getVisibleTitle };
+const getUI = (): string => {
+  return window.navigator.userAgent;
+};
+
+export { getVisibleTitle, getUI };
 
 const BlogUtils = {
   getVisibleTitle,
+  getUI,
 };
 
 export default BlogUtils;

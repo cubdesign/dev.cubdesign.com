@@ -1,4 +1,56 @@
+import fetch from "cross-fetch";
 import Color from "color";
+import { type } from "os";
+
+export type EmojiColor = {
+  emoji: string;
+  color: string;
+};
+
+export type EmojiColorDictionary = {
+  [key: string]: string;
+};
+
+const getEmojiColorsFromAPI = async (
+  emoji: string,
+  ua: string
+): Promise<EmojiColor[]> => {
+  const url = `https://node-vibrant-example.cubdesign.com/api/emoji`;
+  const params = {
+    emoji: emoji,
+    ua: ua,
+  };
+  const query = new URLSearchParams(params);
+  const response = await fetch(`${url}?${query}`);
+  const {
+    result,
+    error,
+  }: {
+    result?: {
+      emoji: string;
+      color: string;
+    }[];
+    error?: {
+      message: string;
+    };
+  } = await response.json();
+
+  if (error || !result) {
+    throw new Error("api error");
+  }
+
+  const emojiColors: EmojiColor[] = [];
+
+  for (let i = 0; i < result.length; i++) {
+    const emoji: {
+      emoji: string;
+      color: string;
+    } = result[i];
+    emojiColors.push({ emoji: emoji.emoji, color: emoji.color });
+  }
+  return emojiColors;
+};
+
 /**
  * Iconの背景色を取得する
  */
@@ -40,6 +92,11 @@ const getDarkenColor = (color: string): string => {
   return Color(color).darken(0.6).toString();
 };
 
-export { getIconColor, getLightenColor, getDarkenColor };
-const IconColorUtils = { getIconColor, getLightenColor, getDarkenColor };
+export { getEmojiColorsFromAPI, getIconColor, getLightenColor, getDarkenColor };
+const IconColorUtils = {
+  getEmojiColorsFromAPI,
+  getIconColor,
+  getLightenColor,
+  getDarkenColor,
+};
 export default IconColorUtils;
