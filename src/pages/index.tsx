@@ -10,6 +10,8 @@ import {
   getEmojiColorsFromAPI,
   EmojiColor,
   EmojiColorDictionary,
+  getVibrantColor,
+  getEmojiBackgroundColor,
 } from "@/libs/IconColorUtils";
 import _sortBy from "lodash/sortBy";
 import PostDate from "@/components/blog/postDate";
@@ -31,7 +33,7 @@ const Title = styled("h1")`
 const backgroundDynamicStyle = ({ color }: { color: string }) =>
   css`
     border: solid 3px ${getLightenColor(color)};
-    background-color: ${color};
+    background-color: ${getEmojiBackgroundColor(color)};
   `;
 
 const PostDiv = styled("div")`

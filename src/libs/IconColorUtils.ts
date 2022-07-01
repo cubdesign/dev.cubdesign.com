@@ -82,21 +82,45 @@ const getIconColor = (icon: string): string => {
 /**
  *  明るい色を取得する
  */
-const getLightenColor = (color: string): string => {
-  return Color(color).lighten(0.6).toString();
+const getLightenColor = (color: string, ratio: number = 0.6): string => {
+  return Color(color).lighten(ratio).toString();
 };
 /**
  * 暗い色を取得する
  */
-const getDarkenColor = (color: string): string => {
-  return Color(color).darken(0.6).toString();
+const getDarkenColor = (color: string, ratio: number = 0.6): string => {
+  return Color(color).darken(ratio).toString();
 };
 
-export { getEmojiColorsFromAPI, getIconColor, getLightenColor, getDarkenColor };
+/**
+ * 鮮やかな色を取得する
+ */
+const getVibrantColor = (color: string, ratio: number = 0.6): string => {
+  return Color(color).saturate(ratio).toString();
+};
+
+/**
+ * 絵文字の背景色を取得する
+ */
+const getEmojiBackgroundColor = (color: string): string => {
+  return getDarkenColor(getVibrantColor(color), 0.2);
+};
+
+export {
+  getEmojiColorsFromAPI,
+  getIconColor,
+  getLightenColor,
+  getDarkenColor,
+  getVibrantColor,
+  getEmojiBackgroundColor,
+};
+
 const IconColorUtils = {
   getEmojiColorsFromAPI,
   getIconColor,
   getLightenColor,
   getDarkenColor,
+  getVibrantColor,
+  getEmojiBackgroundColor,
 };
 export default IconColorUtils;
