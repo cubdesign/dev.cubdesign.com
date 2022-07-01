@@ -1,6 +1,6 @@
 // https://zenn.dev/doanryo/articles/6c970c1fd33554
 
-export const breakpoints = {
+const breakpoints = {
   sm: 640,
   md: 768,
   lg: 1024,
@@ -8,5 +8,14 @@ export const breakpoints = {
   "2xl": 1536,
 } as const;
 
-export const mq = (key: keyof typeof breakpoints) =>
+const mq = (key: keyof typeof breakpoints) =>
   `@media (min-width: ${breakpoints[key]}px)`;
+
+export { breakpoints, mq };
+
+const MqUtil = {
+  breakpoints,
+  mq,
+};
+
+export default MqUtil;
